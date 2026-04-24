@@ -144,6 +144,8 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   .wf-wrap{flex-direction:column !important;}
   .wf-wrap .wf-buttons{flex-direction:row !important;flex-wrap:wrap;gap:5px;margin-bottom:8px;width:100% !important;}
   .wf-wrap svg{height:280px !important;width:100% !important;}
+  #svg-funnel-day, #svg-funnel-month, #svg-tpv-month, #svg-funnel-day ~ svg{height:180px !important;width:100% !important;}
+  [id^="svg-"]{height:180px !important;width:100% !important;}
   .wf-btn.reg{margin-left:0 !important;}
   .reg-group-day, .reg-group-month, .reg-group-tpv{flex-direction:row !important;flex-wrap:wrap !important;}
   .reg-group-day.open, .reg-group-month.open{max-height:80px !important;}
@@ -566,12 +568,21 @@ const _wfData = {
 };
 
 const _wfColors = { ref:"#8FA49E", pos:"#00A868", neg:"#D92B4B", result:"#4A6260" };
-const _W=820,_H=360,_PL=14,_PR=14,_PT=72,_PB=68,_cH=_H-_PT-_PB,_BASE=100;
+const _W=820,_H=360,_PL=14,_PR=14,_PT=72,_PB=68,_BASE=100;
 
 function _buildWF(svgId, data) {
   const svg = document.getElementById(svgId);
   if (!svg) return;
   while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const isMobile = window.innerWidth <= 600;
+  const H = isMobile ? 260 : _H;
+  const PT = isMobile ? 52 : _PT;
+  const PB = isMobile ? 48 : _PB;
+  const cH = H - PT - PB;
+
+  svg.setAttribute('viewBox', `0 0 ${_W} ${H}`);
+  svg.style.height = isMobile ? '160px' : '250px';
 
   const n = data.length;
   const colW = (_W-_PL-_PR)/n;
@@ -590,7 +601,7 @@ function _buildWF(svgId, data) {
   const minVal = Math.min(...allVals)-6;
   const maxVal = Math.max(...allVals)+14;
   const range = maxVal-minVal;
-  const toY = pct => _PT + _cH*(1-(pct-minVal)/range);
+  const toY = pct => PT + cH*(1-(pct-minVal)/range);
 
   const y100 = toY(_BASE);
   const zl = document.createElementNS("http://www.w3.org/2000/svg","line");
@@ -659,7 +670,7 @@ function _buildWF(svgId, data) {
       vl.textContent=d.val; svg.appendChild(vl);
     }
 
-    const nameY = _H-_PB+18;
+    const nameY = H-PB+18;
     d.name.forEach((line,li) => {
       if (!line) return;
       const nl = document.createElementNS("http://www.w3.org/2000/svg","text");
