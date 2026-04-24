@@ -29,7 +29,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;pad
 .sec-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;margin-top:14px;}
 .sec-day{color:var(--green-dark);}
 .sec-month{color:#2A5AAA;}
-.stitle{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.stitle{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .stitle::after{display:none;}
 .sbadge{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.07em;flex-shrink:0;}
 .sb-day{background:rgba(0,168,104,.1);color:#006B40;}
@@ -143,6 +143,7 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   .sec-header .sec-sub{margin-left:0;width:100%;}
   .wf-wrap{flex-direction:column !important;}
   .wf-wrap .wf-buttons{flex-direction:row !important;flex-wrap:wrap;gap:5px;margin-bottom:8px;width:100% !important;}
+  .stitle { font-size: 9px; letter-spacing: .08em; }
   .wf-wrap svg{height:280px !important;width:100% !important;}
   #svg-funnel-day, #svg-funnel-month, #svg-tpv-month, #svg-funnel-day ~ svg{height:180px !important;width:100% !important;}
   [id^="svg-"]{height:180px !important;width:100% !important;}
@@ -329,7 +330,7 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 
 <!-- KPI CARDS MÊS VISÍVEIS -->
 <div style="border-top:1px solid var(--border);margin:40px 0 28px;"></div>
-<div class="stitle no-line" style="margin-top:0;"><span class="sbadge sb-month">Acumulado</span> Resultados Consolidados · Total <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);font-weight:400;">(Polos · Fran · Espec)</span></div>
+<div class="stitle no-line" style="margin-top:0;"><span class="sbadge sb-month">Acumulado</span> Resultados Consolidados · Total <span style="font-family:'DM Mono',monospace;font-size:8px;color:var(--dim);font-weight:400;white-space:nowrap;">(Polos · Fran · Espec)</span></div>
 <div class="kpi-grid-6" style="grid-template-columns:repeat(4,1fr);">
   <div class="kpi-card bad">
     <div class="kpi-label">Credenciamentos</div>
