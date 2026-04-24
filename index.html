@@ -138,8 +138,9 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   .exec p{font-size:12px;}
   .sec-header{flex-wrap:wrap;gap:6px;}
   .sec-header .sec-sub{margin-left:0;width:100%;}
-  #svg-funnel-day, #svg-funnel-month{height:320px !important;}
-  .wf-btn{font-size:9px;padding:3px 7px;}
+  .wf-wrap{flex-direction:column !important;}
+  .wf-wrap .wf-buttons{flex-direction:row !important;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+  .wf-wrap svg{height:280px !important;width:100% !important;}
 }
 </style>
 </head>
@@ -286,8 +287,8 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 </table></div>
 
 <!-- GRÁFICO WATERFALL DIA -->
-<div style="margin-top:16px;display:flex;align-items:center;gap:10px;">
-  <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
+<div class="wf-wrap" style="margin-top:16px;display:flex;align-items:center;gap:10px;">
+  <div class="wf-buttons" style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
     <div class="wf-btn wf-btn-day active" onclick="selectArea('day','consolidado')" data-area="consolidado">Consolidado</div>
     <div class="wf-btn wf-btn-day" onclick="selectArea('day','polos')" data-area="polos">Polos</div>
     <div class="wf-btn wf-btn-day" onclick="selectArea('day','especialistas')" data-area="especialistas">Especialistas</div>
@@ -460,8 +461,8 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 </table></div>
 
 <!-- GRÁFICO WATERFALL MÊS -->
-<div style="margin-top:16px;display:flex;align-items:center;gap:10px;">
-  <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
+<div class="wf-wrap" style="margin-top:16px;display:flex;align-items:center;gap:10px;">
+  <div class="wf-buttons" style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
     <div class="wf-btn wf-btn-month active" onclick="selectArea('month','consolidado')" data-area="consolidado">Consolidado</div>
     <div class="wf-btn wf-btn-month" onclick="selectArea('month','polos')" data-area="polos">Polos</div>
     <div class="wf-btn wf-btn-month" onclick="selectArea('month','especialistas')" data-area="especialistas">Especialistas</div>
