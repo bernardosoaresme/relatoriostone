@@ -114,6 +114,8 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 .wf-btn{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;padding:4px 10px;border-radius:5px;cursor:pointer;border:1px solid #DDE2DF;background:#F4F6F5;color:#5A706A;white-space:nowrap;transition:all .15s;user-select:none;}
 .wf-btn:hover{background:#E8EDEB;color:#1A2420;}
 .wf-btn.active{background:#1A2420;color:#fff;border-color:#1A2420;font-weight:600;}
+.wf-btn.reg{font-size:9px;padding:3px 8px;margin-left:10px;border-color:#C0CCC8;}
+.wf-btn.reg.active{background:#4A6260;border-color:#4A6260;color:#fff;}
 .footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;}
 .footer p{font-size:11px;color:var(--dim);font-family:'DM Mono',monospace;}
 @media(max-width:900px){
@@ -163,13 +165,12 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   <h2>Visão Geral · 23/04/2026</h2>
 
   <p class="sec-label sec-day">● Resultados Consolidados do Dia</p>
-  <p><strong>KPIs Estratégicos:</strong> Dia 23 fecha com <strong>1.626 NCs (+7,7% vs meta, −2,6% vs D22)</strong> e produtividade <strong>0,46 (+5,0% vs meta)</strong> — acima da meta nos dois indicadores. <span class="hl-g">Franquias se destaca novamente</span>: 591 NCs (+36,3% vs meta) e produtividade 0,61 (+23,4% vs meta) — melhor dia do mês. <span class="hl-r">Especialistas segue crítico</span>: 117 NCs (−32,2% vs meta) e produtividade 0,24 (−26,4% vs meta).</p>
-  <p><strong>Funil de Vendas:</strong> Prod. de Tarefa em <strong>8,8 (+25,7% vs meta)</strong> e Conversão 1 em <strong>17,7% (+5,8% vs meta)</strong> — sinais positivos de atividade. <span class="hl-r">Conversão 2 em 29,5% segue como gargalo estrutural</span>: −21,1% vs meta, sem evolução relevante.</p>
+  <p><strong>KPIs Estratégicos:</strong> Dia 23 fecha acima da meta em NCs (+7,7%) e produtividade (+5,0%) — resultado positivo puxado quase exclusivamente por Franquias, que registrou seu melhor dia de abril com 591 NCs e produtividade 0,61. Polos entregou praticamente na meta (+1,6%) enquanto <span class="hl-r">Especialistas segue em colapso pelo terceiro dia consecutivo</span> — 117 NCs, sem nenhum sinal de recuperação.</p>
+  <p><strong>Funil de Vendas:</strong> A atividade em campo está saudável — Prod. de Tarefa e Conversão 1 acima da meta nas três áreas. O problema se concentra inteiramente na <span class="hl-r">Conversão 2 (29,5%, −21,1% vs meta)</span>, que impede que a atividade se converta em resultado. Especialistas com 19,6% é o pior patamar do mês.</p>
 
   <p class="sec-label sec-month" style="margin-top:22px;">● Resultados do Mês por Área</p>
-  <p><strong>KPIs Estratégicos:</strong> <span class="hl-g">Franquias consolida liderança</span>: NCs +4,7% vs meta, TPV M1 +13,9% e produtividade +5,7% — única área no verde nas três frentes. Polos com TPV M1 praticamente na meta (+1,0%) mas NCs em −11,9%; SP mais próxima da virada em NCs (−3,6%). <span class="hl-r">Especialistas segue distante</span>: NCs −31,8% e TPV M1 −19,6%, sem aceleração.</p>
-  <p><strong>Funil de Vendas:</strong> Prod. de Tarefa acima da meta nas três áreas. <span class="hl-r">Conversão 2 segue como gargalo estrutural</span> — Polos −22,3%, Especialistas −23,8% e Franquias −8,6% vs meta.</p>
-  <p><strong>Churn:</strong> <span class="hl-r">Sem variação e acima da meta nas três áreas.</span> Franquias −46,8%, Especialistas −40,0% e Polos −38,2% vs meta. Com 5 dias úteis restantes, reversão improvável.</p>
+  <p><strong>Tendência do Mês:</strong> Franquias é a única área que cresce acima da meta — e o faz com base ativa maior (+10,2%) e ticket médio acima da meta (+3,4%), o que indica qualidade no resultado, não sorte. Polos está estabilizado: TPV na meta mas NCs em −11,9%, o que aponta produtividade por ativo acima do esperado compensando volume menor. <span class="hl-r">Especialistas concentra o maior risco de fechamento</span>: −31,8% em NCs e −19,6% em TPV, com base ativa erodindo (−21,7%).</p>
+  <p><strong>Gargalo estrutural:</strong> A Conversão 2 não melhorou em nenhuma área no mês. Com 5 dias úteis restantes e o funil de atividade funcionando bem, o problema não é falta de visitas — é falha na etapa final de fechamento. <span class="hl-r">Churn imóvel</span> nas três áreas reforça que o problema também está na retenção, não apenas na captação.</p>
 </div>
 
 <!-- KPI CARDS VISÍVEIS -->
@@ -301,10 +302,17 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 <!-- GRÁFICO WATERFALL DIA -->
 <div class="wf-wrap" style="margin-top:16px;display:flex;align-items:center;gap:10px;">
   <div class="wf-buttons" style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
-    <div class="wf-btn wf-btn-day active" onclick="selectArea('day','consolidado')" data-area="consolidado">Consolidado</div>
-    <div class="wf-btn wf-btn-day" onclick="selectArea('day','polos')" data-area="polos">Polos</div>
-    <div class="wf-btn wf-btn-day" onclick="selectArea('day','especialistas')" data-area="especialistas">Especialistas</div>
-    <div class="wf-btn wf-btn-day" onclick="selectArea('day','franquias')" data-area="franquias">Franquias</div>
+    <div class="wf-btn wf-btn-day active" onclick="selectAreaDay('consolidado')" data-area="consolidado">Consolidado</div>
+    <div class="wf-btn wf-btn-day" onclick="selectAreaDay('polos')" data-area="polos">Polos</div>
+    <div class="reg-group-day" id="reg-group-day" style="display:flex;flex-direction:column;gap:4px;overflow:hidden;max-height:0;transition:max-height .25s ease;">
+      <div class="wf-btn wf-btn-day reg" onclick="selectRegDay('centro_norte')" data-reg="centro_norte">Centro Norte</div>
+      <div class="wf-btn wf-btn-day reg" onclick="selectRegDay('nordeste')" data-reg="nordeste">Nordeste</div>
+      <div class="wf-btn wf-btn-day reg" onclick="selectRegDay('sp')" data-reg="sp">SP</div>
+      <div class="wf-btn wf-btn-day reg" onclick="selectRegDay('sudeste')" data-reg="sudeste">Sudeste</div>
+      <div class="wf-btn wf-btn-day reg" onclick="selectRegDay('sul')" data-reg="sul">Sul</div>
+    </div>
+    <div class="wf-btn wf-btn-day" onclick="selectAreaDay('especialistas')" data-area="especialistas">Especialistas</div>
+    <div class="wf-btn wf-btn-day" onclick="selectAreaDay('franquias')" data-area="franquias">Franquias</div>
   </div>
   <svg id="svg-funnel-day" viewBox="0 0 820 360" style="display:block;height:250px;flex:1;"></svg>
 </div>
@@ -475,12 +483,37 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 <!-- GRÁFICO WATERFALL MÊS -->
 <div class="wf-wrap" style="margin-top:16px;display:flex;align-items:center;gap:10px;">
   <div class="wf-buttons" style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
-    <div class="wf-btn wf-btn-month active" onclick="selectArea('month','consolidado')" data-area="consolidado">Consolidado</div>
-    <div class="wf-btn wf-btn-month" onclick="selectArea('month','polos')" data-area="polos">Polos</div>
-    <div class="wf-btn wf-btn-month" onclick="selectArea('month','especialistas')" data-area="especialistas">Especialistas</div>
-    <div class="wf-btn wf-btn-month" onclick="selectArea('month','franquias')" data-area="franquias">Franquias</div>
+    <div class="wf-btn wf-btn-month active" onclick="selectAreaMonth('consolidado')" data-area="consolidado">Consolidado</div>
+    <div class="wf-btn wf-btn-month" onclick="selectAreaMonth('polos')" data-area="polos">Polos</div>
+    <div class="reg-group-month" id="reg-group-month" style="display:flex;flex-direction:column;gap:4px;overflow:hidden;max-height:0;transition:max-height .25s ease;">
+      <div class="wf-btn wf-btn-month reg" onclick="selectRegMonth('m_centro_norte')" data-reg="m_centro_norte">Centro Norte</div>
+      <div class="wf-btn wf-btn-month reg" onclick="selectRegMonth('m_nordeste')" data-reg="m_nordeste">Nordeste</div>
+      <div class="wf-btn wf-btn-month reg" onclick="selectRegMonth('m_sp')" data-reg="m_sp">SP</div>
+      <div class="wf-btn wf-btn-month reg" onclick="selectRegMonth('m_sudeste')" data-reg="m_sudeste">Sudeste</div>
+      <div class="wf-btn wf-btn-month reg" onclick="selectRegMonth('m_sul')" data-reg="m_sul">Sul</div>
+    </div>
+    <div class="wf-btn wf-btn-month" onclick="selectAreaMonth('especialistas')" data-area="especialistas">Especialistas</div>
+    <div class="wf-btn wf-btn-month" onclick="selectAreaMonth('franquias')" data-area="franquias">Franquias</div>
   </div>
   <svg id="svg-funnel-month" viewBox="0 0 820 360" style="display:block;height:250px;flex:1;"></svg>
+</div>
+
+<!-- GRÁFICO TPV M1 ACUMULADO -->
+<div class="wf-wrap" style="margin-top:16px;display:flex;align-items:center;gap:10px;">
+  <div class="wf-buttons" style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
+    <div class="wf-btn wf-btn-tpv active" data-area="consolidado" onclick="selectAreaTPV('consolidado')">Consolidado</div>
+    <div class="wf-btn wf-btn-tpv" data-area="polos" onclick="selectAreaTPV('polos')">Polos</div>
+    <div class="reg-group-tpv" id="reg-group-tpv" style="display:flex;flex-direction:column;gap:4px;overflow:hidden;max-height:0;transition:max-height .25s ease;">
+      <div class="wf-btn wf-btn-tpv reg" data-reg="tcn" onclick="selectRegTPV('tcn')">Centro Norte</div>
+      <div class="wf-btn wf-btn-tpv reg" data-reg="tne" onclick="selectRegTPV('tne')">Nordeste</div>
+      <div class="wf-btn wf-btn-tpv reg" data-reg="tsp" onclick="selectRegTPV('tsp')">SP</div>
+      <div class="wf-btn wf-btn-tpv reg" data-reg="tse" onclick="selectRegTPV('tse')">Sudeste</div>
+      <div class="wf-btn wf-btn-tpv reg" data-reg="tsul" onclick="selectRegTPV('tsul')">Sul</div>
+    </div>
+    <div class="wf-btn wf-btn-tpv" data-area="especialistas" onclick="selectAreaTPV('especialistas')">Especialistas</div>
+    <div class="wf-btn wf-btn-tpv" data-area="franquias" onclick="selectAreaTPV('franquias')">Franquias</div>
+  </div>
+  <svg id="svg-tpv-month" viewBox="0 0 820 360" style="display:block;height:250px;flex:1;"></svg>
 </div>
 
 </div><!-- fim s2 -->
@@ -490,12 +523,12 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
 <!-- INSIGHTS -->
 <div class="stitle" style="margin-top:8px;">Principais Insights</div>
 <div class="igrid">
-  <div class="icard good"><div class="ico">🏆</div><h4>Franquias — dia histórico em abril</h4><p>591 NCs (+36,3% vs meta) e produtividade 0,61 (+23,4%) — melhor resultado do mês. No acumulado, <strong>+4,7% em NCs</strong>, +13,9% em TPV M1 e +5,7% em produtividade. Única área no verde nas três frentes.</p></div>
-  <div class="icard good"><div class="ico">✅</div><h4>Consolidado acima da meta em NCs</h4><p>1.626 NCs (+7,7% vs meta) e produtividade 0,46 (+5,0%) — dia positivo para o total. Prod. de Tarefa (+25,7%) e Conversão 1 (+5,8%) reforçam a atividade do time em campo.</p></div>
-  <div class="icard good"><div class="ico">📍</div><h4>SP — regional mais próxima da virada</h4><p><strong>−3,6% em NCs no acumulado</strong> — menor desvio entre todas as regionais. Com 273 NCs no dia (+17,9% vs meta), SP pode fechar abril próximo da meta se mantiver o ritmo.</p></div>
-  <div class="icard bad"><div class="ico">⚠️</div><h4>Especialistas — situação crítica</h4><p>117 NCs (−32,2% vs meta) pelo terceiro dia seguido sem reação. No acumulado, −31,8% em NCs e −19,6% em TPV M1. Com <strong>5 dias úteis restantes</strong>, a reversão é improvável sem ação imediata.</p></div>
-  <div class="icard bad"><div class="ico">🔻</div><h4>Conversão 2 — gargalo estrutural persiste</h4><p>29,5% consolidado — −21,1% vs meta. No acumulado: Especialistas −23,8%, Polos −20,5% e Franquias −8,6%. Nenhuma área reverteu a tendência em abril.</p></div>
-  <div class="icard bad"><div class="ico">🚨</div><h4>Churn — imóvel, impacto em maio</h4><p>Sem variação nas três áreas. Franquias −46,8%, Especialistas −40,0% e Polos −38,2% vs meta. Com 5 dias úteis restantes, o resultado de abril está praticamente definido — a ação agora impacta maio.</p></div>
+  <div class="icard good"><div class="ico">🏆</div><h4>Franquias cresce com qualidade</h4><p>Não é só volume — base ativa +10,2% e ticket médio acima da meta (+3,4%) indicam que o crescimento é sustentável. Diferente de dias anteriores onde o resultado veio de picos isolados, hoje o funil completo funcionou.</p></div>
+  <div class="icard good"><div class="ico">📍</div><h4>SP acelera em todas as frentes</h4><p>273 NCs hoje (+17,9% vs meta) com Prod. Tarefa, Conv 1 e Conv 2 melhorando vs D22 — única regional com as três métricas do funil se movendo positivamente ao mesmo tempo. No acumulado já está em −3,6%, a mais próxima da virada.</p></div>
+  <div class="icard good"><div class="ico">🔍</div><h4>Polos TPV compensa queda de NCs</h4><p>Com NCs −11,9% no mês mas TPV M1 +1,0% vs meta, Polos está produzindo mais valor por cliente ativo. O ticket médio acima da meta (+7,6%) absorve o gap de volume — padrão que pode não se sustentar nos próximos meses.</p></div>
+  <div class="icard bad"><div class="ico">🚨</div><h4>Especialistas: base ativa em colapso</h4><p>Além dos NCs (−31,8%), a base ativa encolheu −21,7% vs meta. Isso significa que o problema não é só captação — é retenção e produtividade estrutural. Com 5 dias úteis restantes, o impacto em maio já está sendo definido agora.</p></div>
+  <div class="icard bad"><div class="ico">🔻</div><h4>Conv 2 não responde ao funil ativo</h4><p>Prod. Tarefa e Conv 1 acima da meta nas três áreas — o time está em campo e gerando propostas. A falha está exclusivamente no fechamento. Com o funil de atividade saudável, a Conversão 2 aponta para um problema de abordagem ou produto, não de esforço.</p></div>
+  <div class="icard bad"><div class="ico">⏱️</div><h4>5 dias úteis: o que ainda é possível</h4><p>Franquias pode ampliar a vantagem. SP tem momentum para fechar próximo da meta. Polos depende de aceleração em NCs. Especialistas precisa de pelo menos o dobro do ritmo atual para reduzir o desvio. Churn: resultado de abril já definido — foco em maio.</p></div>
 </div>
 
 <!-- CONCLUSÃO -->
@@ -518,12 +551,22 @@ const _wfData = {
   day: {
     consolidado:   [ {name:["NC","Meta"],val:"1.510",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"231",delta:+2.5,type:"pos"}, {name:["Prod.","Tarefa"],val:"8,8",delta:+25.7,type:"pos"}, {name:["Conv 1",""],val:"17,7%",delta:+5.8,type:"pos"}, {name:["Conv 2",""],val:"29,5%",delta:-21.1,type:"neg"}, {name:["NC","Realizado"],val:"1.626",delta:+7.7,type:"result"} ],
     polos:         [ {name:["NC","Meta"],val:"904",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"141",delta:+1.9,type:"pos"}, {name:["Prod.","Tarefa"],val:"9,5",delta:+18.0,type:"pos"}, {name:["Conv 1",""],val:"16,4%",delta:+16.7,type:"pos"}, {name:["Conv 2",""],val:"27,9%",delta:-27.7,type:"neg"}, {name:["NC","Realizado"],val:"918",delta:+1.6,type:"result"} ],
+    centro_norte:  [ {name:["NC","Meta"],val:"207",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"31",delta:+1.3,type:"pos"}, {name:["Prod.","Tarefa"],val:"10,4",delta:-6.6,type:"neg"}, {name:["Conv 1",""],val:"14,2%",delta:+24.7,type:"pos"}, {name:["Conv 2",""],val:"28,6%",delta:-20.1,type:"neg"}, {name:["NC","Realizado"],val:"195",delta:-5.7,type:"result"} ],
+    nordeste:      [ {name:["NC","Meta"],val:"209",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"28",delta:-3.9,type:"neg"}, {name:["Prod.","Tarefa"],val:"8,0",delta:+30.7,type:"pos"}, {name:["Conv 1",""],val:"17,7%",delta:+2.3,type:"pos"}, {name:["Conv 2",""],val:"31,2%",delta:-29.9,type:"neg"}, {name:["NC","Realizado"],val:"188",delta:-10.0,type:"result"} ],
+    sp:            [ {name:["NC","Meta"],val:"232",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"40",delta:+2.3,type:"pos"}, {name:["Prod.","Tarefa"],val:"9,4",delta:+38.1,type:"pos"}, {name:["Conv 1",""],val:"17,6%",delta:+12.3,type:"pos"}, {name:["Conv 2",""],val:"27,5%",delta:-25.6,type:"neg"}, {name:["NC","Realizado"],val:"273",delta:+17.9,type:"result"} ],
+    sudeste:       [ {name:["NC","Meta"],val:"67",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"11",delta:+4.9,type:"pos"}, {name:["Prod.","Tarefa"],val:"10,3",delta:+28.3,type:"pos"}, {name:["Conv 1",""],val:"16,1%",delta:+13.5,type:"pos"}, {name:["Conv 2",""],val:"25,5%",delta:-34.4,type:"neg"}, {name:["NC","Realizado"],val:"67",delta:+0.3,type:"result"} ],
+    sul:           [ {name:["NC","Meta"],val:"190",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"31",delta:+6.9,type:"pos"}, {name:["Prod.","Tarefa"],val:"9,9",delta:+16.3,type:"pos"}, {name:["Conv 1",""],val:"16,5%",delta:+21.1,type:"pos"}, {name:["Conv 2",""],val:"25,8%",delta:-31.7,type:"neg"}, {name:["NC","Realizado"],val:"195",delta:+2.8,type:"result"} ],
     especialistas: [ {name:["NC","Meta"],val:"173",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"32",delta:-7.9,type:"neg"}, {name:["Prod.","Tarefa"],val:"8,1",delta:+27.2,type:"pos"}, {name:["Conv 1",""],val:"15,3%",delta:-17.8,type:"neg"}, {name:["Conv 2",""],val:"19,6%",delta:-29.6,type:"neg"}, {name:["NC","Realizado"],val:"117",delta:-32.2,type:"result"} ],
     franquias:     [ {name:["NC","Meta"],val:"433",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"58",delta:+11.0,type:"pos"}, {name:["Prod.","Tarefa"],val:"7,4",delta:+56.5,type:"pos"}, {name:["Conv 1",""],val:"22,6%",delta:-12.7,type:"neg"}, {name:["Conv 2",""],val:"36,3%",delta:-9.6,type:"neg"}, {name:["NC","Realizado"],val:"591",delta:+36.3,type:"result"} ],
   },
   month: {
     consolidado:   [ {name:["NC","Meta"],val:"25.684",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"3.920",delta:-0.4,type:"neg"}, {name:["Prod.","Tarefa"],val:"8,1",delta:+16.8,type:"pos"}, {name:["Conv 1",""],val:"16,0%",delta:-3.7,type:"neg"}, {name:["Conv 2",""],val:"31,1%",delta:-17.8,type:"neg"}, {name:["NC","Realizado"],val:"23.263",delta:-9.4,type:"result"} ],
     polos:         [ {name:["NC","Meta"],val:"15.395",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"2.378",delta:-0.5,type:"neg"}, {name:["Prod.","Tarefa"],val:"9,0",delta:+11.9,type:"pos"}, {name:["Conv 1",""],val:"14,3%",delta:+2.9,type:"pos"}, {name:["Conv 2",""],val:"30,6%",delta:-20.5,type:"neg"}, {name:["NC","Realizado"],val:"13.569",delta:-11.9,type:"result"} ],
+    m_centro_norte:[ {name:["NC","Meta"],val:"3.095",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"453",delta:-0.6,type:"neg"}, {name:["Prod.","Tarefa"],val:"9,8",delta:-11.8,type:"neg"}, {name:["Conv 1",""],val:"12,4%",delta:+8.6,type:"pos"}, {name:["Conv 2",""],val:"29,7%",delta:-16.8,type:"neg"}, {name:["NC","Realizado"],val:"2.453",delta:-20.7,type:"result"} ],
+    m_nordeste:    [ {name:["NC","Meta"],val:"3.250",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"426",delta:-7.0,type:"neg"}, {name:["Prod.","Tarefa"],val:"7,7",delta:+24.0,type:"pos"}, {name:["Conv 1",""],val:"15,6%",delta:-10.2,type:"neg"}, {name:["Conv 2",""],val:"37,3%",delta:-15.9,type:"neg"}, {name:["NC","Realizado"],val:"2.831",delta:-12.9,type:"result"} ],
+    m_sp:          [ {name:["NC","Meta"],val:"3.452",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"584",delta:-0.3,type:"neg"}, {name:["Prod.","Tarefa"],val:"8,5",delta:+24.9,type:"pos"}, {name:["Conv 1",""],val:"16,0%",delta:+2.0,type:"pos"}, {name:["Conv 2",""],val:"28,1%",delta:-24.1,type:"neg"}, {name:["NC","Realizado"],val:"3.327",delta:-3.6,type:"result"} ],
+    m_sudeste:     [ {name:["NC","Meta"],val:"2.756",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"421",delta:-0.8,type:"neg"}, {name:["Prod.","Tarefa"],val:"9,5",delta:+21.1,type:"pos"}, {name:["Conv 1",""],val:"13,0%",delta:+1.9,type:"pos"}, {name:["Conv 2",""],val:"33,0%",delta:-26.7,type:"neg"}, {name:["NC","Realizado"],val:"2.471",delta:-10.3,type:"result"} ],
+    m_sul:         [ {name:["NC","Meta"],val:"2.842",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"456",delta:+5.2,type:"pos"}, {name:["Prod.","Tarefa"],val:"9,3",delta:+9.6,type:"pos"}, {name:["Conv 1",""],val:"14,4%",delta:+6.1,type:"pos"}, {name:["Conv 2",""],val:"27,1%",delta:-28.4,type:"neg"}, {name:["NC","Realizado"],val:"2.487",delta:-12.5,type:"result"} ],
     especialistas: [ {name:["NC","Meta"],val:"2.961",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"541",delta:-7.7,type:"neg"}, {name:["Prod.","Tarefa"],val:"7,3",delta:+13.7,type:"pos"}, {name:["Conv 1",""],val:"16,4%",delta:-12.3,type:"neg"}, {name:["Conv 2",""],val:"21,3%",delta:-23.8,type:"neg"}, {name:["NC","Realizado"],val:"2.019",delta:-31.8,type:"result"} ],
     franquias:     [ {name:["NC","Meta"],val:"7.328",delta:null,type:"ref"}, {name:["HC","Ativo"],val:"1.001",delta:-1.0,type:"neg"}, {name:["Prod.","Tarefa"],val:"6,6",delta:+38.8,type:"pos"}, {name:["Conv 1",""],val:"21,4%",delta:-17.4,type:"neg"}, {name:["Conv 2",""],val:"36,8%",delta:-8.6,type:"neg"}, {name:["NC","Realizado"],val:"7.675",delta:+4.7,type:"result"} ],
   }
@@ -637,17 +680,85 @@ function _buildWF(svgId, data) {
 }
 
 function selectArea(chart, area) {
-  // Atualiza botões
   document.querySelectorAll(`.wf-btn-${chart}`).forEach(b => {
     b.classList.toggle('active', b.dataset.area === area);
   });
-  // Redesenha gráfico
   _buildWF(`svg-funnel-${chart}`, _wfData[chart][area]);
 }
 
-// Inicializa
+function selectAreaDay(area) {
+  document.querySelectorAll('.wf-btn-day:not(.reg)').forEach(b=>b.classList.toggle('active',b.dataset.area===area));
+  const rg=document.getElementById('reg-group-day');
+  if(area==='polos'){
+    rg.style.maxHeight='200px';
+    document.querySelectorAll('.wf-btn-day.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-funnel-day',_wfData.day.polos);
+  } else {
+    rg.style.maxHeight='0';
+    document.querySelectorAll('.wf-btn-day.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-funnel-day',_wfData.day[area]);
+  }
+}
+
+function selectRegDay(reg) {
+  document.querySelectorAll('.wf-btn-day.reg').forEach(b=>b.classList.toggle('active',b.dataset.reg===reg));
+  _buildWF('svg-funnel-day',_wfData.day[reg]);
+}
+
+function selectAreaMonth(area) {
+  document.querySelectorAll('.wf-btn-month:not(.reg)').forEach(b=>b.classList.toggle('active',b.dataset.area===area));
+  const rg=document.getElementById('reg-group-month');
+  if(area==='polos'){
+    rg.style.maxHeight='200px';
+    document.querySelectorAll('.wf-btn-month.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-funnel-month',_wfData.month.polos);
+  } else {
+    rg.style.maxHeight='0';
+    document.querySelectorAll('.wf-btn-month.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-funnel-month',_wfData.month[area]);
+  }
+}
+
+function selectRegMonth(reg) {
+  document.querySelectorAll('.wf-btn-month.reg').forEach(b=>b.classList.toggle('active',b.dataset.reg===reg));
+  _buildWF('svg-funnel-month',_wfData.month[reg]);
+}
+
+// TPV M1 ACUMULADO
+const _tpvData = {
+  consolidado:  [ {name:["TPV M1","Meta"],       val:"R$1.039,6mi",delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"30.974",delta:-3.2,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,54",delta:-1.2,type:"neg"}, {name:["TPV","Médio"],val:"R$32.244",delta:-0.8,type:"neg"}, {name:["TPV M1","Realizado"],val:"R$998,7mi",delta:-3.9,type:"result"} ],
+  polos:        [ {name:["TPV M1","Meta"],         val:"R$491,3mi", delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"18.158",delta:-6.1,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,50",delta:-5.4,type:"neg"}, {name:["TPV","Médio"],val:"R$27.339",delta:+7.6,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$496,4mi",delta:+1.0,type:"result"} ],
+  tcn:          [ {name:["TPV M1","Meta"],         val:"R$106,3mi", delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"3.283",delta:-14.9,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,48",delta:-14.4,type:"neg"}, {name:["TPV","Médio"],val:"R$29.340",delta:+6.5,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$96,3mi",delta:-9.4,type:"result"} ],
+  tne:          [ {name:["TPV M1","Meta"],         val:"R$94,9mi",  delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"3.939",delta:+1.1,type:"pos"}, {name:["Prod M1","Ativos/HCDU"],val:"0,62",delta:+8.7,type:"pos"}, {name:["TPV","Médio"],val:"R$26.431",delta:+8.5,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$104,1mi",delta:+9.7,type:"result"} ],
+  tsp:          [ {name:["TPV M1","Meta"],         val:"R$109,7mi", delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"4.188",delta:-4.7,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,48",delta:-4.4,type:"neg"}, {name:["TPV","Médio"],val:"R$25.929",delta:+3.9,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$108,6mi",delta:-1.0,type:"result"} ],
+  tse:          [ {name:["TPV M1","Meta"],         val:"R$90,0mi",  delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"3.428",delta:-4.5,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,57",delta:-3.7,type:"neg"}, {name:["TPV","Médio"],val:"R$30.101",delta:+20.1,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$103,2mi",delta:+14.7,type:"result"} ],
+  tsul:         [ {name:["TPV M1","Meta"],         val:"R$90,4mi",  delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"3.320",delta:-7.6,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,49",delta:-12.2,type:"neg"}, {name:["TPV","Médio"],val:"R$25.363",delta:+0.8,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$84,2mi",delta:-6.9,type:"result"} ],
+  especialistas:[ {name:["TPV M1","Meta"],         val:"R$364,9mi", delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"2.759",delta:-21.7,type:"neg"}, {name:["Prod M1","Ativos/HCDU"],val:"0,32",delta:-14.0,type:"neg"}, {name:["TPV","Médio"],val:"R$106.314",delta:+2.7,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$293,3mi",delta:-19.6,type:"result"} ],
+  franquias:    [ {name:["TPV M1","Meta"],         val:"R$183,4mi", delta:null,  type:"ref"}, {name:["Base Ativa","M1"],val:"10.057",delta:+10.2,type:"pos"}, {name:["Prod M1","Ativos/HCDU"],val:"0,74",delta:+11.2,type:"pos"}, {name:["TPV","Médio"],val:"R$20.779",delta:+3.4,type:"pos"}, {name:["TPV M1","Realizado"],val:"R$209,0mi",delta:+13.9,type:"result"} ],
+};
+
+function selectAreaTPV(area) {
+  document.querySelectorAll('.wf-btn-tpv:not(.reg)').forEach(b=>b.classList.toggle('active',b.dataset.area===area));
+  const rg=document.getElementById('reg-group-tpv');
+  if(area==='polos'){
+    rg.style.maxHeight='200px';
+    document.querySelectorAll('.wf-btn-tpv.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-tpv-month',_tpvData.polos);
+  } else {
+    rg.style.maxHeight='0';
+    document.querySelectorAll('.wf-btn-tpv.reg').forEach(b=>b.classList.remove('active'));
+    _buildWF('svg-tpv-month',_tpvData[area]);
+  }
+}
+
+function selectRegTPV(reg) {
+  document.querySelectorAll('.wf-btn-tpv.reg').forEach(b=>b.classList.toggle('active',b.dataset.reg===reg));
+  _buildWF('svg-tpv-month',_tpvData[reg]);
+}
+
 _buildWF('svg-funnel-day', _wfData.day.consolidado);
 _buildWF('svg-funnel-month', _wfData.month.consolidado);
+_buildWF('svg-tpv-month', _tpvData.consolidado);
 </script>
 
 <script>
