@@ -147,6 +147,7 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   .wf-wrap svg{height:280px !important;width:100% !important;}
   #svg-funnel-day, #svg-funnel-month, #svg-tpv-month, #svg-funnel-day ~ svg{height:180px !important;width:100% !important;}
   [id^="svg-"]{height:180px !important;width:100% !important;}
+  [id^="fcst-svg-"]{height:160px !important;width:100% !important;}
   .wf-btn.reg{margin-left:0 !important;}
   .reg-group-day, .reg-group-month, .reg-group-tpv{flex-direction:row !important;flex-wrap:wrap !important;}
   .reg-group-day.open, .reg-group-month.open{max-height:80px !important;}
@@ -545,6 +546,191 @@ td:first-child{text-align:left;font-family:'Syne',sans-serif;font-weight:600;fon
   <p><strong>Conversão 2:</strong> Gargalo estrutural — nenhuma área reverteu no acumulado. Com os dias restantes de abril diminuindo, é prioridade máxima para não comprometer o fechamento do mês.</p>
   <p><strong>Churn:</strong> Imóvel — resultado de abril já praticamente definido. Franquias (−46,8%) e Especialistas (−40,0%) são os casos mais graves. O foco agora é minimizar o impacto em maio.</p>
 </div>
+
+<!-- GRÁFICO ÚNICO COM TOGGLE -->
+<div style="margin-bottom:32px;">
+  <!-- Toggle NC / TPV M1 -->
+  <div style="display:flex;flex-direction:row;gap:4px;margin-bottom:10px;">
+    <div id="fcst-toggle-nc" onclick="fcstToggleChart('nc')" style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;background:#1A2420;color:#fff;border:1px solid #1A2420;transition:all .15s;">NC</div>
+    <div id="fcst-toggle-tpv" onclick="fcstToggleChart('tpv')" style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;background:#F4F6F5;color:#5A706A;border:1px solid #DDE2DF;transition:all .15s;">TPV M1</div>
+  </div>
+  <!-- Botões de área -->
+  <div style="display:flex;flex-direction:row;gap:5px;flex-wrap:wrap;margin-bottom:10px;" id="fcst-btns-area">
+    <div class="wf-btn active" data-area="consolidado" onclick="fcstSelectArea('consolidado')">Consolidado</div>
+    <div class="wf-btn" data-area="polos" onclick="fcstSelectArea('polos')">Polos</div>
+    <div class="wf-btn" data-area="especialistas" onclick="fcstSelectArea('especialistas')">Especialistas</div>
+    <div class="wf-btn" data-area="franquias" onclick="fcstSelectArea('franquias')">Franquias</div>
+  </div>
+  <!-- Gráfico NC (padrão) -->
+  <div id="fcst-chart-nc">
+    <svg id="fcst-svg-nc" viewBox="0 0 860 240" style="display:block;width:100%;height:200px;"></svg>
+  </div>
+  <!-- Gráfico TPV (oculto) -->
+  <div id="fcst-chart-tpv" style="display:none;">
+    <svg id="fcst-svg-tpv" viewBox="0 0 860 240" style="display:block;width:100%;height:200px;"></svg>
+  </div>
+  <!-- Legenda discreta -->
+  <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;justify-content:center;">
+    <div style="display:flex;align-items:center;gap:5px;">
+      <div style="width:18px;height:0;border-top:1.5px dashed #8FA49E;"></div>
+      <span style="font-family:'DM Mono',monospace;font-size:8px;color:#8FA49E;letter-spacing:.05em;text-transform:uppercase;">Budget</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:5px;">
+      <div style="width:10px;height:10px;border-radius:2px;background:#C8D4D0;opacity:.75;"></div>
+      <span style="font-family:'DM Mono',monospace;font-size:8px;color:#8FA49E;letter-spacing:.05em;text-transform:uppercase;">Forecast</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const _fcstMESES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+const _fcstDATA = {
+  nc: {
+    consolidado: {
+      budget:    [24162, 27556, 36095, 25746, 26824, 32176, 39148, 37628, 33206, 36560, 26292, 29154],
+      forecast:  [24187, 30263, 36186, 35312, 36223, 36871, 40660, 39771, 39586, 38652, 36173, 29579],
+      realizado: [33258, 30102, 36621, 23263, null, null, null, null, null, null, null, null],
+    },
+    polos: {
+      budget:    [15351, 18603, 21856, 20908, 21753, 21979, 23569, 22892, 22607, 21439, 20419, 18234],
+      forecast:  [14353, 18125, 21230, 21522, 22170, 22197, 23907, 23888, 23646, 22656, 20938, 17868],
+      realizado: [19621, 17185, 21667, 13569, null, null, null, null, null, null, null, null],
+    },
+    especialistas: {
+      budget:    [1846, 2770, 3635, 3874, 4107, 4220, 4667, 4614, 4770, 4999, 4909, 3545],
+      forecast:  [2009, 3055, 3854, 3697, 3960, 4440, 5328, 5286, 5343, 5399, 5142, 3990],
+      realizado: [2746, 2864, 3232, 2019, null, null, null, null, null, null, null, null],
+    },
+    franquias: {
+      budget:    [6965, 8676, 10604, 9640, 9640, 9775, 10912, 10122, 10122, 10122, 9640, 7375],
+      forecast:  [7825, 9083, 11102, 10093, 10093, 10234, 11425, 10597, 10597, 10597, 10093, 7721],
+      realizado: [10891, 10053, 11722, 7675, null, null, null, null, null, null, null, null],
+    },
+  },
+  tpv: {
+    consolidado: {
+      budget:    [908.6, 728.1, 1039.8, 1255.8, 1300.4, 1315.6, 1398.9, 1451.5, 1381.9, 1458.1, 1427.9, 1568.7],
+      forecast:  [961.9, 729.3, 1072.0, 1247.1, 1284.8, 1287.1, 1404.3, 1511.9, 1455.7, 1550.7, 1509.5, 1690.5],
+      realizado: [1016.6, 1118.2, 1147.0, 998.7, null, null, null, null, null, null, null, null],
+    },
+    polos: {
+      budget:    [472.0, 399.3, 532.4, 615.6, 619.5, 626.2, 661.7, 673.6, 641.2, 663.9, 619.0, 673.1],
+      forecast:  [423.0, 356.0, 500.8, 558.4, 602.9, 597.5, 622.5, 639.3, 624.5, 658.1, 621.8, 684.3],
+      realizado: [440.2, 545.0, 539.0, 496.4, null, null, null, null, null, null, null, null],
+    },
+    especialistas: {
+      budget:    [300.8, 198.2, 328.3, 424.2, 474.7, 488.8, 525.1, 552.2, 535.2, 579.5, 597.3, 667.8],
+      forecast:  [344.6, 216.8, 367.4, 449.1, 452.0, 468.1, 548.3, 623.8, 605.3, 651.6, 649.9, 735.5],
+      realizado: [357.6, 357.1, 381.0, 293.3, null, null, null, null, null, null, null, null],
+    },
+    franquias: {
+      budget:    [135.8, 130.6, 179.1, 215.9, 206.2, 200.6, 212.1, 225.7, 205.5, 214.8, 211.5, 227.8],
+      forecast:  [194.4, 156.5, 203.8, 239.6, 229.8, 221.5, 233.6, 248.8, 225.9, 241.0, 237.8, 270.7],
+      realizado: [218.9, 216.1, 227.0, 209.0, null, null, null, null, null, null, null, null],
+    },
+  }
+};
+
+const _fcstGREEN='#00A868', _fcstRED='#D92B4B', _fcstFCST='#C8D4D0', _fcstBUDG='#8FA49E';
+
+function fcstBuildChart(svgId, d) {
+  const svg=document.getElementById(svgId);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const isMobile = window.innerWidth <= 600;
+  const W=860, H=isMobile?200:240, PL=12, PR=12, PT=isMobile?20:28, PB=isMobile?26:32;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.style.height = isMobile ? '140px' : '200px';
+  const cW=W-PL-PR, cH=H-PT-PB;
+  const colW=cW/12;
+  const barW=colW*0.55;
+  const barX=i=>PL+i*colW+(colW-barW)/2;
+  const allVals=[...d.budget,...d.forecast,...d.realizado.filter(v=>v!==null)];
+  const maxVal=Math.max(...allVals)*1.18;
+  const toY=v=>PT+cH*(1-v/maxVal);
+  const toH=v=>cH*(v/maxVal);
+
+  _fcstMESES.forEach((_,i)=>{
+    const bud=d.budget[i], fcst=d.forecast[i], real=d.realizado[i];
+    const bx=barX(i);
+    if(real!==null){
+      // Barra forecast atrás (mais larga e clara)
+      const rf=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rf.setAttribute('x',bx-2);rf.setAttribute('y',toY(fcst));
+      rf.setAttribute('width',barW+4);rf.setAttribute('height',toH(fcst));
+      rf.setAttribute('fill',_fcstFCST);rf.setAttribute('rx','3');rf.setAttribute('opacity','0.6');
+      svg.appendChild(rf);
+      // Barra realizado na frente
+      const color=real>=bud?_fcstGREEN:_fcstRED;
+      const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      r.setAttribute('x',bx);r.setAttribute('y',toY(real));
+      r.setAttribute('width',barW);r.setAttribute('height',toH(real));
+      r.setAttribute('fill',color);r.setAttribute('rx','3');r.setAttribute('opacity','0.88');
+      svg.appendChild(r);
+      // Delta % vs budget
+      const delta = ((real/bud)-1)*100;
+      const sign = delta>=0 ? '+' : '';
+      const dt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      dt.setAttribute('x',bx+barW/2);
+      dt.setAttribute('y',toY(real)-5);
+      dt.setAttribute('text-anchor','middle');
+      dt.setAttribute('font-size','8');
+      dt.setAttribute('font-family','DM Mono,monospace');
+      dt.setAttribute('font-weight','600');
+      dt.setAttribute('fill',color);
+      dt.textContent=`${sign}${delta.toFixed(1)}%`;
+      svg.appendChild(dt);
+    } else {
+      const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      r.setAttribute('x',bx);r.setAttribute('y',toY(fcst));
+      r.setAttribute('width',barW);r.setAttribute('height',toH(fcst));
+      r.setAttribute('fill',_fcstFCST);r.setAttribute('rx','3');r.setAttribute('opacity','0.75');
+      svg.appendChild(r);
+    }
+    const mt=document.createElementNS('http://www.w3.org/2000/svg','text');
+    mt.setAttribute('x',bx+barW/2);mt.setAttribute('y',H-PB+16);
+    mt.setAttribute('text-anchor','middle');mt.setAttribute('font-size','9');
+    mt.setAttribute('font-family','DM Sans,sans-serif');mt.setAttribute('fill','#8FA49E');
+    mt.textContent=_fcstMESES[i];
+    svg.appendChild(mt);
+  });
+
+  const pts=_fcstMESES.map((_,i)=>`${barX(i)+barW/2},${toY(d.budget[i])}`).join(' ');
+  const pl=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+  pl.setAttribute('points',pts);pl.setAttribute('fill','none');
+  pl.setAttribute('stroke',_fcstBUDG);pl.setAttribute('stroke-width','1.2');
+  pl.setAttribute('stroke-dasharray','4 3');pl.setAttribute('opacity','0.6');
+  pl.setAttribute('stroke-linejoin','round');
+  svg.appendChild(pl);
+}
+
+let _currentChart = 'nc';
+let _currentArea = 'consolidado';
+
+function fcstToggleChart(chart) {
+  _currentChart = chart;
+  const isNC = chart === 'nc';
+  document.getElementById('fcst-chart-nc').style.display = isNC ? 'block' : 'none';
+  document.getElementById('fcst-chart-tpv').style.display = isNC ? 'none' : 'block';
+  const tnc = document.getElementById('fcst-toggle-nc');
+  const ttpv = document.getElementById('fcst-toggle-tpv');
+  tnc.style.background = isNC ? '#1A2420' : '#F4F6F5';
+  tnc.style.color = isNC ? '#fff' : '#5A706A';
+  tnc.style.borderColor = isNC ? '#1A2420' : '#DDE2DF';
+  ttpv.style.background = isNC ? '#F4F6F5' : '#1A2420';
+  ttpv.style.color = isNC ? '#5A706A' : '#fff';
+  ttpv.style.borderColor = isNC ? '#DDE2DF' : '#1A2420';
+  fcstBuildChart(`fcst-svg-${chart}`, _fcstDATA[chart][_currentArea]);
+}
+
+function fcstSelectArea(area) {
+  _currentArea = area;
+  document.querySelectorAll('#fcst-btns-area .wf-btn').forEach(b=>b.classList.toggle('active',b.dataset.area===area));
+  fcstBuildChart(`fcst-svg-${_currentChart}`, _fcstDATA[_currentChart][area]);
+}
+
+fcstBuildChart('fcst-svg-nc', _fcstDATA.nc.consolidado);
+</script>
 
 <div class="footer">
   <p>Stone · Área Comercial · Dados extraídos dos sistemas internos</p>
