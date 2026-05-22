@@ -792,8 +792,12 @@ function toggleExp(btn){btn.classList.toggle('open');btn.nextElementSibling.clas
       painel.style.top = (abaixo + 40) + 'px';
     }
   }
+  // Rodar em múltiplos eventos para garantir que funciona em qualquer forma de navegação
+  document.addEventListener('DOMContentLoaded', posicionarBtn);
   window.addEventListener('load', posicionarBtn);
   window.addEventListener('resize', posicionarBtn);
+  // Fallback com delay para casos onde fontes/imagens atrasam o layout
+  setTimeout(posicionarBtn, 300);
 
   // Cria o painel dropdown
   const painel = document.createElement('div');
